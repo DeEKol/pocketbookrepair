@@ -40,9 +40,9 @@ public class DeviceControllerTest {
 	BigDecimal buy_3 = new BigDecimal("12000");
 	BigDecimal sale_3 = new BigDecimal("20000");
 	
-	DeviceEntity DEVICE_1 = new DeviceEntity(1l, "HP", "Intel i3, UHD600", "100% Den", buy_1, sale_1, "клавиатура");
-	DeviceEntity DEVICE_2 = new DeviceEntity(2l, "Dell", "AMD A8, 7970HD", "100% Den", buy_2, sale_2, "матрица");
-	DeviceEntity DEVICE_3 = new DeviceEntity(3l, "Asus", "Intel i5, mx330", "100% Den", buy_3, sale_3, null);
+	DeviceEntity DEVICE_1 = new DeviceEntity(1l, "HP", "Intel i3, UHD600", "100% Den", buy_1, sale_1, "Intel i3", "UHD600", 8, 512, false, "клавиатура");
+	DeviceEntity DEVICE_2 = new DeviceEntity(2l, "Dell", "AMD A8, 7970HD", "100% Den", buy_2, sale_2, "AMD A8", "7970HD", 4, 256, true, "матрица");
+	DeviceEntity DEVICE_3 = new DeviceEntity(3l, "Asus", "Intel i5, mx330", "100% Den", buy_3, sale_3, "Intel i5", "mx330", 12, 512, false, null);
 	DeviceEntity[] dArr = {DEVICE_1, DEVICE_2, DEVICE_3};
 	
 	@SuppressWarnings("unchecked")

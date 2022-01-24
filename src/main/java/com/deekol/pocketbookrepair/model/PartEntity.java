@@ -34,6 +34,4 @@ public class PartEntity extends BasicEntity {
 	public PartEntity(Long id, String name, String specification, String description, BigDecimal buy, BigDecimal sale) {
 		super(id, name, specification, description, buy, sale);
 	}
-	
-	
 }
