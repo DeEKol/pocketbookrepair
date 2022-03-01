@@ -2,6 +2,7 @@ package com.deekol.pocketbookrepair.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,6 +23,8 @@ public class Basic {
 	
 	private String name;
 	private String specification;
+	
+	@Column(name = "full_specification")
 	private String fullSpecification;
 	private String state;
 	private String description;

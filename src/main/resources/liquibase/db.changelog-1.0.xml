@@ -1,0 +1,200 @@
+<databaseChangeLog 	xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+					xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+										http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+										
+										
+	<changeSet id="1.0.0" author="denis.kolodkin">
+		<createTable tableName="device">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="name" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="specification" type="VARCHAR(100)">
+				<constraints nullable="true" unique="true"/>
+			</column>
+			<column name="full_specification" type="VARCHAR(100)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="state" type="VARCHAR(255)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="description" type="VARCHAR(255)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="buy" type="numeric">
+				<constraints nullable="false"/>
+			</column>
+			<column name="sale" type="numeric">
+				<constraints nullable="true"/>
+			</column>
+			
+			<column name="cpu" type="VARCHAR(30)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="gpu" type="VARCHAR(50)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="ram" type="int">
+				<constraints nullable="true"/>
+			</column>
+			<column name="hdd" type="int">
+				<constraints nullable="true"/>
+			</column>
+			<column name="battery" type="boolean">
+				<constraints nullable="true"/>
+			</column>
+			<column name="defect" type="VARCHAR(255)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="made" type="VARCHAR(10)">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+
+		<createTable tableName="device_track">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="name" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="specification" type="VARCHAR(100)">
+				<constraints nullable="true" unique="true"/>
+			</column>
+			<column name="full_specification" type="VARCHAR(100)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="state" type="VARCHAR(255)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="description" type="VARCHAR(255)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="buy" type="numeric">
+				<constraints nullable="false"/>
+			</column>
+			<column name="sale" type="numeric">
+				<constraints nullable="true"/>
+			</column>
+			
+			<column name="cpu" type="VARCHAR(30)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="gpu" type="VARCHAR(50)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="ram" type="int">
+				<constraints nullable="true"/>
+			</column>
+			<column name="hdd" type="int">
+				<constraints nullable="true"/>
+			</column>
+			<column name="battery" type="boolean">
+				<constraints nullable="true"/>
+			</column>
+			<column name="defect" type="VARCHAR(255)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="made" type="VARCHAR(10)">
+				<constraints nullable="true"/>
+			</column>
+			
+			<column name="track_date" type="VARCHAR(10)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+
+		<createTable tableName="part">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="name" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="specification" type="VARCHAR(100)">
+				<constraints nullable="true" unique="true"/>
+			</column>
+			<column name="full_specification" type="VARCHAR(100)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="state" type="VARCHAR(255)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="description" type="VARCHAR(255)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="buy" type="numeric">
+				<constraints nullable="false"/>
+			</column>
+			<column name="sale" type="numeric">
+				<constraints nullable="true"/>
+			</column>
+			
+			<column name="suitable" type="VARCHAR(255)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="device_id" type="BIGINT">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+
+		<addForeignKeyConstraint 
+			baseColumnNames="device_id"
+			baseTableName="part"
+			constraintName="fk_part_device"
+			onDelete="CASCADE"
+			onUpdate="RESTRICT"
+			referencedColumnNames="id"
+			referencedTableName="device"
+		/>
+
+		<insert tableName="device">
+			<column name="name" value="HP G6"/>
+			<column name="specification" value="G631"/>
+			<column name="state" value="good"/>
+			<column name="description" value="pallet is broke"/>
+			<column name="buy" value="10000"/>
+			<column name="sale" value="14000"/>
+			
+			<column name="cpu" value="Intel i3"/>
+			<column name="gpu" value="UHD600"/>
+			<column name="ram" value="8000"/>
+			<column name="hdd" value="256"/>
+			<column name="battery" value="true"/>
+			<column name="defect" value="pallet is broke"/>
+			<column name="made" value="2016"/>
+		</insert>
+		
+		<insert tableName="part">
+			<column name="name" value="HP keyboard"/>
+			<column name="state" value="new"/>
+			<column name="description" value="new keyboard"/>
+			<column name="buy" value="1100"/>
+			
+			<column name="suitable" value="HP G6"/>
+			<column name="device_id" value="1"/>
+		</insert>
+		
+		<insert tableName="device_track">
+			<column name="name" value="ASUS k52"/>
+			<column name="specification" value="K542"/>
+			<column name="full_specification" value="K54231PA"/>
+			<column name="state" value="bad"/>
+			<column name="description" value="body is broke"/>
+			<column name="buy" value="2000"/>
+			
+			<column name="cpu" value="AMD A8"/>
+			<column name="gpu" value="Radeon 7870"/>
+			<column name="ram" value="12000"/>
+			<column name="hdd" value="512000"/>
+			<column name="battery" value="false"/>
+			<column name="defect" value="body is broke"/>
+			<column name="made" value="2012"/>
+			
+			<column name="track_date" value="20.02.2022"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>
