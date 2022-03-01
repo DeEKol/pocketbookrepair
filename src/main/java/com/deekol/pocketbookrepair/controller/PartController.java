@@ -1,6 +1,9 @@
 package com.deekol.pocketbookrepair.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,7 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.deekol.pocketbookrepair.model.DeviceEntity;
 import com.deekol.pocketbookrepair.model.PartEntity;
+import com.deekol.pocketbookrepair.payload.request.PartRequest;
+import com.deekol.pocketbookrepair.payload.response.PartResponse;
+import com.deekol.pocketbookrepair.repository.DeviceRepository;
 import com.deekol.pocketbookrepair.repository.PartRepository;
 
 import lombok.AllArgsConstructor;
@@ -22,26 +29,123 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class PartController {
 	private final PartRepository partRepository;
+	private final DeviceRepository deviceRepository;
 	
 	@GetMapping
-	public List<PartEntity> getAll() {
-		return partRepository.findAll();
+	public List<PartResponse> getAll() {
+		List<PartEntity> partEntityList = partRepository.findAll();
+		List<PartResponse> partResponseList = new ArrayList<>();
+		
+		for(PartEntity partEntity : partEntityList) {
+			Long deviceId = null;
+			if (partEntity.getDeviceEntity() != null) {
+				deviceId = partEntity.getDeviceEntity().getId();
+			}
+			
+			PartResponse partResponse = PartResponse.builder()
+					.id(partEntity.getId())
+					.name(partEntity.getName())
+					.specification(partEntity.getSpecification())
+					.description(partEntity.getDescription())
+					.buy(partEntity.getBuy())
+					.sale(partEntity.getSale())
+					.deviceId(deviceId)
+					.build();
+			
+			partResponseList.add(partResponse);
+		}
+		
+		return partResponseList;
 	}
 	
 	@GetMapping("{id}")
-	public PartEntity getOne(@PathVariable("id") Long id) {
-		return partRepository.findById(id).get();
+	public PartResponse getOne(@PathVariable("id") Long id) {
+		PartEntity partEntity = partRepository.findById(id).get();
+		
+		Long deviceId = null;
+		if (partEntity.getDeviceEntity() != null) {
+			deviceId = partEntity.getDeviceEntity().getId();
+		}
+		
+		PartResponse partResponse = PartResponse.builder()
+				.id(partEntity.getId())
+				.name(partEntity.getName())
+				.specification(partEntity.getSpecification())
+				.description(partEntity.getDescription())
+				.buy(partEntity.getBuy())
+				.sale(partEntity.getSale())
+				.deviceId(deviceId)
+				.build();
+		
+		return partResponse;
 	}
 	
 	@PostMapping
-	public PartEntity add(@RequestBody PartEntity partEntity) {
-		return partRepository.save(partEntity);
+	public PartResponse add(@RequestBody PartRequest partRequest) {
+		DeviceEntity deviceEntity = null;
+		if (partRequest.getDeviceId() != null) {
+			deviceEntity = deviceRepository.getById(partRequest.getDeviceId());
+		}
+		
+		PartEntity partEntity = PartEntity.builder()
+				.name(partRequest.getName())
+				.specification(partRequest.getSpecification())
+				.description(partRequest.getDescription())
+				.buy(partRequest.getBuy())
+				.sale(partRequest.getSale())
+				.deviceEntity(deviceEntity)
+				.build();
+		
+		partRepository.save(partEntity);
+		
+		Long deviceId = null;
+		if (partEntity.getDeviceEntity() != null) {
+			deviceId = partEntity.getDeviceEntity().getId();
+		}
+		
+		return PartResponse.builder()
+												.id(partEntity.getId())
+												.name(partEntity.getName())
+												.specification(partEntity.getSpecification())
+												.description(partEntity.getDescription())
+												.buy(partEntity.getBuy())
+												.sale(partEntity.getSale())
+												.deviceId(deviceId)
+												.build();
 	}
 	
 	@PutMapping("{id}")
-	public PartEntity update(@PathVariable("id") PartEntity partFromDb, @RequestBody PartEntity partEntity) {
+	public PartResponse update(@PathVariable("id") PartEntity partFromDb, @Valid @RequestBody PartRequest partRequest) {
+		DeviceEntity deviceEntity = null;
+		if (partRequest.getDeviceId() != null) {
+			deviceEntity = deviceRepository.getById(partRequest.getDeviceId());
+		}
+		PartEntity partEntity = PartEntity.builder()
+				.name(partRequest.getName())
+				.specification(partRequest.getSpecification())
+				.description(partRequest.getDescription())
+				.buy(partRequest.getBuy())
+				.sale(partRequest.getSale())
+				.deviceEntity(deviceEntity)
+				.build();
+		
 		BeanUtils.copyProperties(partEntity, partFromDb, "id");
-		return partRepository.save(partFromDb);
+		partRepository.save(partFromDb);
+		
+		Long deviceId = null;
+		if (partFromDb.getDeviceEntity() != null) {
+			deviceId = partFromDb.getDeviceEntity().getId();
+		}
+		
+		return PartResponse.builder()
+				.id(partFromDb.getId())
+				.name(partFromDb.getName())
+				.specification(partFromDb.getSpecification())
+				.description(partFromDb.getDescription())
+				.buy(partFromDb.getBuy())
+				.sale(partFromDb.getSale())
+				.deviceId(deviceId)
+				.build();
 	}
 	
 	@DeleteMapping("{id}")

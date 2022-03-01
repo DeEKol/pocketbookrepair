@@ -1,5 +1,6 @@
 package com.deekol.pocketbookrepair.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.deekol.pocketbookrepair.model.DeviceEntity;
+import com.deekol.pocketbookrepair.payload.response.DeviceResponse;
 import com.deekol.pocketbookrepair.repository.DeviceRepository;
 
 import lombok.AllArgsConstructor;
@@ -21,16 +23,59 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/api/device")
 @AllArgsConstructor
 public class DeviceController {
-private final DeviceRepository deviceRepository;
+	private final DeviceRepository deviceRepository;
 	
 	@GetMapping
-	public List<DeviceEntity> getAll() {
-		return deviceRepository.findAll();
+	public List<DeviceResponse> getAll() {
+		List<DeviceEntity> deviceEntityList = deviceRepository.findAll();
+		List<DeviceResponse> deviceResponseList = new ArrayList<>();
+		
+		for(DeviceEntity deviceEntity : deviceEntityList) {
+			DeviceResponse deviceResponse = DeviceResponse.builder()
+					.id(deviceEntity.getId())
+					.name(deviceEntity.getName())
+					.specification(deviceEntity.getSpecification())
+					.description(deviceEntity.getDescription())
+					.buy(deviceEntity.getBuy())
+					.sale(deviceEntity.getSale())
+
+					.cpu(deviceEntity.getCpu())
+					.gpu(deviceEntity.getGpu())
+					.ram(deviceEntity.getRam())
+					.hdd(deviceEntity.getHdd())
+					.battery(deviceEntity.isBattery())
+					.defect(deviceEntity.getDefect())
+					.made(deviceEntity.getMade())
+					.build();
+			
+			deviceResponseList.add(deviceResponse);
+		}
+		
+		return deviceResponseList;
 	}
 	
 	@GetMapping("{id}")
-	public DeviceEntity getOne(@PathVariable("id") Long id) {
-		return deviceRepository.findById(id).get();
+	public DeviceResponse getOne(@PathVariable("id") Long id) {
+		DeviceEntity deviceEntity = deviceRepository.findById(id).get();
+		
+		DeviceResponse deviceResponse = DeviceResponse.builder()
+				.id(deviceEntity.getId())
+				.name(deviceEntity.getName())
+				.specification(deviceEntity.getSpecification())
+				.description(deviceEntity.getDescription())
+				.buy(deviceEntity.getBuy())
+				.sale(deviceEntity.getSale())
+
+				.cpu(deviceEntity.getCpu())
+				.gpu(deviceEntity.getGpu())
+				.ram(deviceEntity.getRam())
+				.hdd(deviceEntity.getHdd())
+				.battery(deviceEntity.isBattery())
+				.defect(deviceEntity.getDefect())
+				.made(deviceEntity.getMade())
+				.build();
+		
+		return deviceResponse;
 	}
 	
 	@PostMapping

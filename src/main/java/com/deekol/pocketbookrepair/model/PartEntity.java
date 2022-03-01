@@ -19,19 +19,18 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class PartEntity extends BasicEntity {
+public class PartEntity extends Basic {
 
+	private String suitable;
+	
 	@ManyToOne
 	@JoinColumn(name = "device_id")
 	private DeviceEntity deviceEntity;
 
-	public PartEntity(Long id, String name, String specification, String description, BigDecimal buy, BigDecimal sale, DeviceEntity deviceEntity) {
-		super(id, name, specification, description, buy, sale);
-		deviceEntity = this.deviceEntity;
-	}
-
 	@Builder
-	public PartEntity(Long id, String name, String specification, String description, BigDecimal buy, BigDecimal sale) {
-		super(id, name, specification, description, buy, sale);
+	public PartEntity(Long id, String name, String specification, String fullSpecification, String state, String description, BigDecimal buy, BigDecimal sale, DeviceEntity deviceEntity, String suitable) {
+		super(id, name, specification, fullSpecification, state, description, buy, sale);
+		this.deviceEntity = deviceEntity;
+		this.suitable = suitable;
 	}
 }
