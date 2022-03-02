@@ -9,6 +9,9 @@
 			<column name="id" type="BIGINT" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false"/>
 			</column>
+			<column name="maker" type="VARCHAR(100)">
+				<constraints nullable="false"/>
+			</column>
 			<column name="name" type="VARCHAR(100)">
 				<constraints nullable="false"/>
 			</column>
@@ -57,6 +60,9 @@
 		<createTable tableName="device_track">
 			<column name="id" type="BIGINT" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="maker" type="VARCHAR(100)">
+				<constraints nullable="false"/>
 			</column>
 			<column name="name" type="VARCHAR(100)">
 				<constraints nullable="false"/>
@@ -111,6 +117,9 @@
 			<column name="id" type="BIGINT" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false"/>
 			</column>
+			<column name="maker" type="VARCHAR(100)">
+				<constraints nullable="true"/>
+			</column>
 			<column name="name" type="VARCHAR(100)">
 				<constraints nullable="false"/>
 			</column>
@@ -152,7 +161,8 @@
 		/>
 
 		<insert tableName="device">
-			<column name="name" value="HP G6"/>
+			<column name="maker" value="HP"/>
+			<column name="name" value="G6"/>
 			<column name="specification" value="G631"/>
 			<column name="state" value="good"/>
 			<column name="description" value="pallet is broke"/>
@@ -169,7 +179,7 @@
 		</insert>
 		
 		<insert tableName="part">
-			<column name="name" value="HP keyboard"/>
+			<column name="name" value="keyboard"/>
 			<column name="state" value="new"/>
 			<column name="description" value="new keyboard"/>
 			<column name="buy" value="1100"/>
@@ -179,7 +189,8 @@
 		</insert>
 		
 		<insert tableName="device_track">
-			<column name="name" value="ASUS k52"/>
+			<column name="maker" value="ASUS"/>
+			<column name="name" value="k52"/>
 			<column name="specification" value="K542"/>
 			<column name="full_specification" value="K54231PA"/>
 			<column name="state" value="bad"/>

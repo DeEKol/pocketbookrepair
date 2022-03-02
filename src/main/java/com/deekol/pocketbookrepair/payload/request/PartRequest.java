@@ -12,6 +12,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class PartRequest {
+	private String maker;
+	
 	@NotBlank
 	private String name;
 	private String specification;

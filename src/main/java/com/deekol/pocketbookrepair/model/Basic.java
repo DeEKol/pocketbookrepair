@@ -21,6 +21,7 @@ public class Basic {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	private String maker;
 	private String name;
 	private String specification;
 	

@@ -33,8 +33,10 @@ public class DeviceController {
 		for(DeviceEntity deviceEntity : deviceEntityList) {
 			DeviceResponse deviceResponse = DeviceResponse.builder()
 					.id(deviceEntity.getId())
+					.maker(deviceEntity.getMaker())
 					.name(deviceEntity.getName())
 					.specification(deviceEntity.getSpecification())
+					.fullSpecification(deviceEntity.getFullSpecification())
 					.description(deviceEntity.getDescription())
 					.buy(deviceEntity.getBuy())
 					.sale(deviceEntity.getSale())
@@ -60,6 +62,7 @@ public class DeviceController {
 		
 		DeviceResponse deviceResponse = DeviceResponse.builder()
 				.id(deviceEntity.getId())
+				.maker(deviceEntity.getMaker())
 				.name(deviceEntity.getName())
 				.specification(deviceEntity.getSpecification())
 				.description(deviceEntity.getDescription())

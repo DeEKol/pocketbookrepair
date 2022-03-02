@@ -44,6 +44,7 @@ public class PartController {
 			
 			PartResponse partResponse = PartResponse.builder()
 					.id(partEntity.getId())
+					.maker(partEntity.getMaker())
 					.name(partEntity.getName())
 					.specification(partEntity.getSpecification())
 					.description(partEntity.getDescription())
@@ -69,6 +70,7 @@ public class PartController {
 		
 		PartResponse partResponse = PartResponse.builder()
 				.id(partEntity.getId())
+				.maker(partEntity.getMaker())
 				.name(partEntity.getName())
 				.specification(partEntity.getSpecification())
 				.description(partEntity.getDescription())

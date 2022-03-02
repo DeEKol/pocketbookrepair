@@ -15,6 +15,7 @@ import lombok.Setter;
 @Builder
 public class PartResponse {
 	private Long id;
+	private String maker;
 	private String name;
 	private String specification;
 	private String description;

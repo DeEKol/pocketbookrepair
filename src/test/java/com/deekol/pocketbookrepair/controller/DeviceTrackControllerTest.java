@@ -1,5 +1,11 @@
 package com.deekol.pocketbookrepair.controller;
 
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,22 +22,19 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.hamcrest.Matchers.*;
-
-import com.deekol.pocketbookrepair.model.DeviceEntity;
-import com.deekol.pocketbookrepair.repository.DeviceRepository;
+import com.deekol.pocketbookrepair.model.DeviceTrackEntity;
+import com.deekol.pocketbookrepair.repository.DeviceTrackRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebMvcTest(DeviceController.class)
-public class DeviceControllerTest {
+@WebMvcTest(DeviceTrackController.class)
+public class DeviceTrackControllerTest {
 	@Autowired
 	MockMvc mockMvc;
 	@Autowired
 	ObjectMapper mapper;
 	
 	@MockBean
-	DeviceRepository deviceRepository;
+	DeviceTrackRepository deviceTrackRepository;
 	
 	BigDecimal buy_1 = new BigDecimal("20000");
 	BigDecimal sale_1 = new BigDecimal("35000");
@@ -40,20 +43,20 @@ public class DeviceControllerTest {
 	BigDecimal buy_3 = new BigDecimal("12000");
 	BigDecimal sale_3 = new BigDecimal("20000");
 	
-	DeviceEntity DEVICE_1 = new DeviceEntity(1l, "Apple", "Air", null, null, "good", "100% Den", buy_1, null, "Intel i3", "UHD600", 12000, 512000, true, null, "2015", null);
-	DeviceEntity DEVICE_2 = new DeviceEntity(2l, "Acer", "Apire70", null, null, "bad", "100% Den", buy_2, null, "Intel i5", "MX250", 8000, 256000, false, null, "2012", null);
-	DeviceEntity DEVICE_3 = new DeviceEntity(3l, "Dell", "UD20", null, null, "new", "100% Den", buy_3, sale_3, "Amd A8", "HD7870", 16000, 512000, true, null, "2021", null);
-	DeviceEntity[] dArr = {DEVICE_1, DEVICE_2, DEVICE_3};
+	DeviceTrackEntity DEVICE_1 = new DeviceTrackEntity(1l, "Apple", "Air", null, null, "good", "100% Den", buy_1, null, "Intel i3", "UHD600", 12000, 512000, true, null, "2015", null);
+	DeviceTrackEntity DEVICE_2 = new DeviceTrackEntity(2l, "Acer", "Apire70", null, null, "bad", "100% Den", buy_2, null, "Intel i5", "MX250", 8000, 256000, false, null, "2012", null);
+	DeviceTrackEntity DEVICE_3 = new DeviceTrackEntity(3l, "Dell", "UD20", null, null, "new", "100% Den", buy_3, sale_3, "Amd A8", "HD7870", 16000, 512000, true, null, "2021", null);
+	DeviceTrackEntity[] dArr = {DEVICE_1, DEVICE_2, DEVICE_3};
 	
 	@SuppressWarnings("unchecked")
 	@Test
-	public void getAllDevices_success() throws Exception {
+	public void getAllDeviceTrack_success() throws Exception {
 		List<?> devices = new ArrayList<>(Arrays.asList(dArr));
 		
-		Mockito.when(deviceRepository.findAll()).thenReturn((List<DeviceEntity>) devices);
+		Mockito.when(deviceTrackRepository.findAll()).thenReturn((List<DeviceTrackEntity>) devices);
 	
 		mockMvc.perform(MockMvcRequestBuilders
-				.get("/api/device")
+				.get("/api/deviceTrack")
 				.contentType(MediaType.APPLICATION_JSON))
 					.andExpect(jsonPath("$", hasSize(3)))
 					.andExpect(jsonPath("$[2].maker", is("Dell")))
@@ -61,10 +64,10 @@ public class DeviceControllerTest {
 	}
 	
 	@Test
-	public void getDeviceById_success() throws Exception {
-		Mockito.when(deviceRepository.findById(DEVICE_1.getId())).thenReturn(Optional.of(DEVICE_1));
+	public void getDeviceTrackById_success() throws Exception {
+		Mockito.when(deviceTrackRepository.findById(DEVICE_1.getId())).thenReturn(Optional.of(DEVICE_1));
 		mockMvc.perform(MockMvcRequestBuilders
-				.get("/api/device/1")
+				.get("/api/deviceTrack/1")
 				.contentType(MediaType.APPLICATION_JSON))
 					.andExpect(status().isOk())
 					.andExpect(jsonPath("$", notNullValue()))
@@ -73,11 +76,11 @@ public class DeviceControllerTest {
 	}
 	
 	@Test
-	public void addDevice_success() throws Exception {
+	public void addDeviceTrack_success() throws Exception {
 		BigDecimal deviceBuy = new BigDecimal("20000");
 		BigDecimal deviceSale = new BigDecimal("30000");
 		
-		DeviceEntity device = DeviceEntity.builder()
+		DeviceTrackEntity device = DeviceTrackEntity.builder()
 				.maker("Huawei")
 				.name("d14")
 				.specification("d1412")
@@ -90,9 +93,9 @@ public class DeviceControllerTest {
 				.hdd(120000)
 				.build();
 		
-		Mockito.when(deviceRepository.save(device)).thenReturn(device);
+		Mockito.when(deviceTrackRepository.save(device)).thenReturn(device);
 		
-		MockHttpServletRequestBuilder mockRequestBuilder = MockMvcRequestBuilders.post("/api/device")
+		MockHttpServletRequestBuilder mockRequestBuilder = MockMvcRequestBuilders.post("/api/deviceTrack")
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
 				.content(this.mapper.writeValueAsString(device));
@@ -133,11 +136,11 @@ public class DeviceControllerTest {
 //	}
 	
 	@Test
-	public void deleteDeviceById_success() throws Exception {
-		Mockito.when(deviceRepository.findById(DEVICE_1.getId())).thenReturn(Optional.of(DEVICE_1));
+	public void deleteDeviceTrackById_success() throws Exception {
+		Mockito.when(deviceTrackRepository.findById(DEVICE_1.getId())).thenReturn(Optional.of(DEVICE_1));
 		
 		mockMvc.perform(MockMvcRequestBuilders
-				.delete("/api/device/1")
+				.delete("/api/deviceTrack/1")
 				.contentType(MediaType.APPLICATION_JSON))
 					.andExpect(status().isOk());
 	}

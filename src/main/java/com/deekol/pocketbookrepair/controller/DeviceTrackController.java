@@ -34,13 +34,13 @@ public class DeviceTrackController {
 	}
 	
 	@PostMapping
-	public DeviceTrackEntity create(@RequestBody DeviceTrackEntity deviceEntity) {
-		return deviceTrackRepository.save(deviceEntity);
+	public DeviceTrackEntity create(@RequestBody DeviceTrackEntity deviceTrackEntity) {
+		return deviceTrackRepository.save(deviceTrackEntity);
 	}
 	
 	@PutMapping("{id}")
-	public DeviceTrackEntity update(@PathVariable("id") DeviceTrackEntity deviceFromDb, @RequestBody DeviceTrackEntity deviceEntity) {
-		BeanUtils.copyProperties(deviceEntity, deviceFromDb, "id");
+	public DeviceTrackEntity update(@PathVariable("id") DeviceTrackEntity deviceFromDb, @RequestBody DeviceTrackEntity deviceTrackEntity) {
+		BeanUtils.copyProperties(deviceTrackEntity, deviceFromDb, "id");
 		return deviceTrackRepository.save(deviceFromDb);
 	}
 	

@@ -15,6 +15,7 @@ import lombok.Setter;
 @Builder
 public class DeviceResponse {
 	private Long id;
+	private String maker;
 	private String name;
 	private String specification;
 	private String fullSpecification;

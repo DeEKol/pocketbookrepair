@@ -1,5 +1,6 @@
 package com.deekol.pocketbookrepair.model;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -22,7 +23,11 @@ public class DeviceEntity extends Device {
 	private Set<PartEntity> partEntity;
 
 	@Builder
-	public DeviceEntity(String cpu, String gpu, int ram, int hdd, boolean battery, String defect, String made) {
-		super(cpu, gpu, ram, hdd, battery, defect, made);
-	}	
+	public DeviceEntity(Long id, String maker, String name, String specification, String fullSpecification,
+			String state, String description, BigDecimal buy, BigDecimal sale, String cpu, String gpu, int ram, int hdd,
+			boolean battery, String defect, String made, Set<PartEntity> partEntity) {
+		super(id, maker, name, specification, fullSpecification, state, description, buy, sale, cpu, gpu, ram, hdd,
+				battery, defect, made);
+		this.partEntity = partEntity;
+	}
 }

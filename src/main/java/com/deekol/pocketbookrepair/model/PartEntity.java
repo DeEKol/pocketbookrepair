@@ -28,9 +28,9 @@ public class PartEntity extends Basic {
 	private DeviceEntity deviceEntity;
 
 	@Builder
-	public PartEntity(Long id, String name, String specification, String fullSpecification, String state, String description, BigDecimal buy, BigDecimal sale, DeviceEntity deviceEntity, String suitable) {
-		super(id, name, specification, fullSpecification, state, description, buy, sale);
-		this.deviceEntity = deviceEntity;
+	public PartEntity(Long id, String maker, String name, String specification, String fullSpecification, String state, String description, BigDecimal buy, BigDecimal sale, String suitable, DeviceEntity deviceEntity) {
+		super(id, maker, name, specification, fullSpecification, state, description, buy, sale);
 		this.suitable = suitable;
+		this.deviceEntity = deviceEntity;
 	}
 }
