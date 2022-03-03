@@ -1,6 +1,7 @@
 package com.deekol.pocketbookrepair.controller;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -41,9 +42,9 @@ public class PartControllerTest {
 	BigDecimal sale_2 = new BigDecimal("1500");
 	BigDecimal buy_3 = new BigDecimal("6000");
 	
-	PartEntity PART_1 = new PartEntity(1l, null, "keyboard", null, null, "new", "100% Den", buy_1, null, "HP, Acer", null);
-	PartEntity PART_2 = new PartEntity(2l, "Asus", "top case", null, null, "new", "100% Den", buy_1, sale_2, "Asus d20", null);
-	PartEntity PART_3 = new PartEntity(3l, "Apple", "Display", null, null, "good", "100% Den", buy_1, null, "Air", null);
+	PartEntity PART_1 = new PartEntity(1l, null, "keyboard", null, null, "new", "100% Den", buy_1, null, null, "HP, Acer", null);
+	PartEntity PART_2 = new PartEntity(2l, "Asus", "top case", null, null, "new", "100% Den", buy_1, sale_2, null, "Asus d20", null);
+	PartEntity PART_3 = new PartEntity(3l, "Apple", "Display", null, null, "good", "100% Den", buy_1, null, null, "Air", null);
 	PartEntity[] pArr = {PART_1, PART_2, PART_3};
 	
 	@SuppressWarnings("unchecked")
@@ -81,6 +82,7 @@ public class PartControllerTest {
 				.description("100% Den")
 				.buy(partBuy)
 				.sale(null)
+				.creationDate(LocalDate.now())
 				.build();
 		
 		PartResponse partResponse = PartResponse.builder()
@@ -89,6 +91,7 @@ public class PartControllerTest {
 				.description("100% Den")
 				.buy(partBuy)
 				.sale(null)
+				.creationDate(LocalDate.now())
 				.build();
 		
 		Mockito.when(partRepository.save(part)).thenReturn(part);

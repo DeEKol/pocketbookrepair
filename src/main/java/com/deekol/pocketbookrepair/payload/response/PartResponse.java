@@ -1,6 +1,7 @@
 package com.deekol.pocketbookrepair.payload.response;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,5 +22,6 @@ public class PartResponse {
 	private String description;
 	private BigDecimal buy;
 	private BigDecimal sale;
+	private LocalDate creationDate;
 	private Long deviceId;
 }

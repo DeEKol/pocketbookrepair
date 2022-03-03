@@ -1,5 +1,6 @@
 package com.deekol.pocketbookrepair.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -35,12 +36,14 @@ public class DeviceTrackController {
 	
 	@PostMapping
 	public DeviceTrackEntity create(@RequestBody DeviceTrackEntity deviceTrackEntity) {
+		deviceTrackEntity.setCreationDate(LocalDate.now());
 		return deviceTrackRepository.save(deviceTrackEntity);
 	}
 	
 	@PutMapping("{id}")
 	public DeviceTrackEntity update(@PathVariable("id") DeviceTrackEntity deviceFromDb, @RequestBody DeviceTrackEntity deviceTrackEntity) {
 		BeanUtils.copyProperties(deviceTrackEntity, deviceFromDb, "id");
+		deviceFromDb.setCreationDate(LocalDate.now());
 		return deviceTrackRepository.save(deviceFromDb);
 	}
 	

@@ -1,5 +1,6 @@
 package com.deekol.pocketbookrepair.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +41,7 @@ public class DeviceController {
 					.description(deviceEntity.getDescription())
 					.buy(deviceEntity.getBuy())
 					.sale(deviceEntity.getSale())
+					.creationDate(deviceEntity.getCreationDate())
 
 					.cpu(deviceEntity.getCpu())
 					.gpu(deviceEntity.getGpu())
@@ -68,6 +70,7 @@ public class DeviceController {
 				.description(deviceEntity.getDescription())
 				.buy(deviceEntity.getBuy())
 				.sale(deviceEntity.getSale())
+				.creationDate(deviceEntity.getCreationDate())
 
 				.cpu(deviceEntity.getCpu())
 				.gpu(deviceEntity.getGpu())
@@ -83,12 +86,14 @@ public class DeviceController {
 	
 	@PostMapping
 	public DeviceEntity create(@RequestBody DeviceEntity deviceEntity) {
+		deviceEntity.setCreationDate(LocalDate.now());
 		return deviceRepository.save(deviceEntity);
 	}
 	
 	@PutMapping("{id}")
 	public DeviceEntity update(@PathVariable("id") DeviceEntity deviceFromDb, @RequestBody DeviceEntity deviceEntity) {
 		BeanUtils.copyProperties(deviceEntity, deviceFromDb, "id");
+		deviceFromDb.setCreationDate(LocalDate.now());
 		return deviceRepository.save(deviceFromDb);
 	}
 	

@@ -1,6 +1,7 @@
 package com.deekol.pocketbookrepair.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -31,4 +32,7 @@ public class Basic {
 	private String description;
 	private BigDecimal buy;
 	private BigDecimal sale;
+	
+	@Column(name = "creation_date")
+	private LocalDate creationDate;
 }

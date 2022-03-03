@@ -1,6 +1,7 @@
 package com.deekol.pocketbookrepair.controller;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -40,9 +41,9 @@ public class DeviceControllerTest {
 	BigDecimal buy_3 = new BigDecimal("12000");
 	BigDecimal sale_3 = new BigDecimal("20000");
 	
-	DeviceEntity DEVICE_1 = new DeviceEntity(1l, "Apple", "Air", null, null, "good", "100% Den", buy_1, null, "Intel i3", "UHD600", 12000, 512000, true, null, "2015", null);
-	DeviceEntity DEVICE_2 = new DeviceEntity(2l, "Acer", "Apire70", null, null, "bad", "100% Den", buy_2, null, "Intel i5", "MX250", 8000, 256000, false, null, "2012", null);
-	DeviceEntity DEVICE_3 = new DeviceEntity(3l, "Dell", "UD20", null, null, "new", "100% Den", buy_3, sale_3, "Amd A8", "HD7870", 16000, 512000, true, null, "2021", null);
+	DeviceEntity DEVICE_1 = new DeviceEntity(1l, "Apple", "Air", null, null, "good", "100% Den", buy_1, null, null, "Intel i3", "UHD600", 12000, 512000, true, null, null, null);
+	DeviceEntity DEVICE_2 = new DeviceEntity(2l, "Acer", "Apire70", null, null, "bad", "100% Den", buy_2, null, null, "Intel i5", "MX250", 8000, 256000, false, null, null, null);
+	DeviceEntity DEVICE_3 = new DeviceEntity(3l, "Dell", "UD20", null, null, "new", "100% Den", buy_3, sale_3, null, "Amd A8", "HD7870", 16000, 512000, true, null, null, null);
 	DeviceEntity[] dArr = {DEVICE_1, DEVICE_2, DEVICE_3};
 	
 	@SuppressWarnings("unchecked")
@@ -84,6 +85,7 @@ public class DeviceControllerTest {
 				.description("d1412dk")
 				.buy(deviceBuy)
 				.sale(deviceSale)
+				.creationDate(LocalDate.now())
 				.cpu("Celeron")
 				.gpu("UHD400")
 				.ram(4000)

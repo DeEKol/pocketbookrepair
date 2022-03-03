@@ -33,6 +33,9 @@
 			<column name="sale" type="numeric">
 				<constraints nullable="true"/>
 			</column>
+			<column name="creation_date" type="date">
+				<constraints nullable="false"/>
+			</column>
 			
 			<column name="cpu" type="VARCHAR(30)">
 				<constraints nullable="true"/>
@@ -52,7 +55,7 @@
 			<column name="defect" type="VARCHAR(255)">
 				<constraints nullable="true"/>
 			</column>
-			<column name="made" type="VARCHAR(10)">
+			<column name="made" type="date">
 				<constraints nullable="true"/>
 			</column>
 		</createTable>
@@ -85,6 +88,9 @@
 			<column name="sale" type="numeric">
 				<constraints nullable="true"/>
 			</column>
+			<column name="creation_date" type="date">
+				<constraints nullable="false"/>
+			</column>
 			
 			<column name="cpu" type="VARCHAR(30)">
 				<constraints nullable="true"/>
@@ -104,12 +110,8 @@
 			<column name="defect" type="VARCHAR(255)">
 				<constraints nullable="true"/>
 			</column>
-			<column name="made" type="VARCHAR(10)">
+			<column name="made" type="date">
 				<constraints nullable="true"/>
-			</column>
-			
-			<column name="track_date" type="VARCHAR(10)">
-				<constraints nullable="false"/>
 			</column>
 		</createTable>
 
@@ -141,6 +143,9 @@
 			<column name="sale" type="numeric">
 				<constraints nullable="true"/>
 			</column>
+			<column name="creation_date" type="date">
+				<constraints nullable="false"/>
+			</column>
 			
 			<column name="suitable" type="VARCHAR(255)">
 				<constraints nullable="true"/>
@@ -168,6 +173,7 @@
 			<column name="description" value="pallet is broke"/>
 			<column name="buy" value="10000"/>
 			<column name="sale" value="14000"/>
+			<column name="creation_date" value="2022-02-20"/>
 			
 			<column name="cpu" value="Intel i3"/>
 			<column name="gpu" value="UHD600"/>
@@ -175,7 +181,7 @@
 			<column name="hdd" value="256"/>
 			<column name="battery" value="true"/>
 			<column name="defect" value="pallet is broke"/>
-			<column name="made" value="2016"/>
+			<column name="made" value="2016-04-18"/>
 		</insert>
 		
 		<insert tableName="part">
@@ -183,6 +189,7 @@
 			<column name="state" value="new"/>
 			<column name="description" value="new keyboard"/>
 			<column name="buy" value="1100"/>
+			<column name="creation_date" value="2022-02-20"/>
 			
 			<column name="suitable" value="HP G6"/>
 			<column name="device_id" value="1"/>
@@ -196,6 +203,7 @@
 			<column name="state" value="bad"/>
 			<column name="description" value="body is broke"/>
 			<column name="buy" value="2000"/>
+			<column name="creation_date" value="2022-02-20"/>
 			
 			<column name="cpu" value="AMD A8"/>
 			<column name="gpu" value="Radeon 7870"/>
@@ -203,9 +211,7 @@
 			<column name="hdd" value="512000"/>
 			<column name="battery" value="false"/>
 			<column name="defect" value="body is broke"/>
-			<column name="made" value="2012"/>
-			
-			<column name="track_date" value="20.02.2022"/>
+			<column name="made" value="2012-03-24"/>
 		</insert>
 	</changeSet>
 </databaseChangeLog>

@@ -1,6 +1,7 @@
 package com.deekol.pocketbookrepair.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -28,8 +29,8 @@ public class PartEntity extends Basic {
 	private DeviceEntity deviceEntity;
 
 	@Builder
-	public PartEntity(Long id, String maker, String name, String specification, String fullSpecification, String state, String description, BigDecimal buy, BigDecimal sale, String suitable, DeviceEntity deviceEntity) {
-		super(id, maker, name, specification, fullSpecification, state, description, buy, sale);
+	public PartEntity(Long id, String maker, String name, String specification, String fullSpecification, String state, String description, BigDecimal buy, BigDecimal sale, LocalDate creationDate, String suitable, DeviceEntity deviceEntity) {
+		super(id, maker, name, specification, fullSpecification, state, description, buy, sale, creationDate);
 		this.suitable = suitable;
 		this.deviceEntity = deviceEntity;
 	}

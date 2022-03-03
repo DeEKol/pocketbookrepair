@@ -1,6 +1,7 @@
 package com.deekol.pocketbookrepair.payload.response;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +24,7 @@ public class DeviceResponse {
 	private String description;
 	private BigDecimal buy;
 	private BigDecimal sale;
+	private LocalDate creationDate;
 
 	private String cpu;
 	private String gpu;
@@ -30,5 +32,5 @@ public class DeviceResponse {
 	private int hdd;
 	private boolean battery;
 	private String defect;
-	private String made;
+	private LocalDate made;
 }

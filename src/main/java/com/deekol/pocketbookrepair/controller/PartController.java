@@ -1,5 +1,6 @@
 package com.deekol.pocketbookrepair.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +51,7 @@ public class PartController {
 					.description(partEntity.getDescription())
 					.buy(partEntity.getBuy())
 					.sale(partEntity.getSale())
+					.creationDate(partEntity.getCreationDate())
 					.deviceId(deviceId)
 					.build();
 			
@@ -76,6 +78,7 @@ public class PartController {
 				.description(partEntity.getDescription())
 				.buy(partEntity.getBuy())
 				.sale(partEntity.getSale())
+				.creationDate(partEntity.getCreationDate())
 				.deviceId(deviceId)
 				.build();
 		
@@ -95,6 +98,7 @@ public class PartController {
 				.description(partRequest.getDescription())
 				.buy(partRequest.getBuy())
 				.sale(partRequest.getSale())
+				.creationDate(LocalDate.now())
 				.deviceEntity(deviceEntity)
 				.build();
 		
@@ -112,6 +116,7 @@ public class PartController {
 												.description(partEntity.getDescription())
 												.buy(partEntity.getBuy())
 												.sale(partEntity.getSale())
+												.creationDate(partEntity.getCreationDate())
 												.deviceId(deviceId)
 												.build();
 	}
@@ -128,6 +133,7 @@ public class PartController {
 				.description(partRequest.getDescription())
 				.buy(partRequest.getBuy())
 				.sale(partRequest.getSale())
+				.creationDate(LocalDate.now())
 				.deviceEntity(deviceEntity)
 				.build();
 		
@@ -146,6 +152,7 @@ public class PartController {
 				.description(partFromDb.getDescription())
 				.buy(partFromDb.getBuy())
 				.sale(partFromDb.getSale())
+				.creationDate(partFromDb.getCreationDate())
 				.deviceId(deviceId)
 				.build();
 	}
