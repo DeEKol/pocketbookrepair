@@ -159,7 +159,7 @@
 			baseColumnNames="device_id"
 			baseTableName="part"
 			constraintName="fk_part_device"
-			onDelete="CASCADE"
+			onDelete="RESTRICT"
 			onUpdate="RESTRICT"
 			referencedColumnNames="id"
 			referencedTableName="device"
